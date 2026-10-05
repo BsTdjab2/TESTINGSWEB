@@ -1,0 +1,25 @@
+# Response headers for Cloudflare Pages and Netlify.
+#
+# GitHub Pages IGNORES this file. It cannot set custom headers at all, so on
+# Pages the only policy in force is the <meta> CSP inside each HTML file.
+# That meta tag cannot carry frame-ancestors, HSTS or Permissions-Policy.
+# If you want the full set below, put Cloudflare in front of the site or host
+# it on Cloudflare Pages.
+#
+# connect-src must list the contact worker and any host you fetch firmware
+# from, otherwise the browser blocks those requests with no visible error.
+
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'; connect-src 'self' https://api.web3forms.com https://*.workers.dev https://api.github.com https://github.com https://objects.githubusercontent.com https://release-assets.githubusercontent.com https://raw.githubusercontent.com
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), serial=(self)
+  Cross-Origin-Opener-Policy: same-origin
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/assets/data/firmware.json
+  Cache-Control: public, max-age=300
