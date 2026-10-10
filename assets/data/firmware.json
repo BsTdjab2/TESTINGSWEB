@@ -1,0 +1,158 @@
+{
+  "README": [
+    "This file drives the firmware dropdown in the web flasher.",
+    "A build gets its binary in one of two ways: a pinned url, or a release block.",
+    "A build with neither shows up greyed out and cannot be flashed, which is deliberate:",
+    "nothing is offered that cannot actually be downloaded.",
+    "",
+    "PINNED URL (url / offset / sha256)",
+    "url    : a direct link to a MERGED firmware image (bootloader + partitions + app",
+    "         in one file). A GitHub release asset works, as long as it is a single",
+    "         merged .bin. Build one with: esptool.py --chip esp32 merge_bin -o merged.bin",
+    "         --flash_mode dio --flash_size 4MB 0x1000 bootloader.bin 0x8000 partitions.bin",
+    "         0x10000 firmware.bin",
+    "offset : where that image starts. A merged image is 0. A bare app image is usually",
+    "         65536 (0x10000). A typo here is refused rather than treated as 0, because",
+    "         writing an app image over the bootloader bricks the board.",
+    "sha256 : optional but strongly recommended. The SHA-256 of the exact file at url.",
+    "         When present the browser verifies the download before writing anything, so",
+    "         a swapped or tampered release asset is refused. Get it with:",
+    "           sha256sum merged.bin        (Linux/macOS)",
+    "           certutil -hashfile merged.bin SHA256   (Windows)",
+    "         Without it the flasher warns in its console that the download is unverified.",
+    "",
+    "RELEASE BLOCK (release)",
+    "Pulls the project's own latest GitHub release at flash time, so the site does not go",
+    "stale every time upstream ships. The trade is that the file is whatever upstream just",
+    "published, so it CANNOT be checksummed against anything here, and the flasher says so",
+    "in its console before every such write. Fields:",
+    "  repo    : owner/repo, e.g. pr3y/Bruce. Anything else is refused.",
+    "  include : substrings that must ALL appear in the asset filename, case-insensitive.",
+    "  exclude : substrings that must appear in NONE of them. Use this to drop the separate",
+    "            bootloader and partition files that some projects also attach.",
+    "  offset  : where the chosen asset gets written. Same rules as offset above.",
+    "  note    : optional, shown under the build dropdown. Use it for anything the person",
+    "            has to know before writing, such as an image being app-only.",
+    "These are substring filters, not regexes, on purpose. Upstream names assets per BOARD,",
+    "not per chip family, so the matching files are listed and the person picks their board.",
+    "If a filter matches nothing, the flasher lists every .bin in the release instead and",
+    "says the filter has gone stale, so a rename upstream degrades rather than breaks.",
+    "",
+    "Two things to check when you add a URL or a repo:",
+    "1. The host must send CORS headers. GitHub release assets do. If a download fails",
+    "   with a CORS error, put the .bin in this repo under assets/firmware/ and use a",
+    "   relative path like assets/firmware/bruce-esp32.bin instead.",
+    "2. Any external host must be listed in connect-src in the CSP, both in the meta tag",
+    "   in index.html and in _headers. api.github.com, github.com and the two",
+    "   githubusercontent asset hosts are already there.",
+    "",
+    "The include/exclude filters below were written from each project's documented naming",
+    "and have NOT been checked against a live release. Open the flasher once and look at",
+    "the build dropdown: if it says the filter went stale, tighten these to the real names."
+  ],
+  "firmware": [
+    {
+      "id": "bruce",
+      "name": "Bruce",
+      "homepage": "https://github.com/pr3y/Bruce",
+      "builds": [
+        {
+          "chip": "esp32",
+          "release": {
+            "repo": "pr3y/Bruce",
+            "include": ["esp32"],
+            "exclude": ["s3", "c3", "c6", "bootloader", "partition", "boot_app"],
+            "offset": 0
+          }
+        },
+        {
+          "chip": "esp32s3",
+          "release": {
+            "repo": "pr3y/Bruce",
+            "include": ["s3"],
+            "exclude": ["bootloader", "partition", "boot_app"],
+            "offset": 0
+          }
+        },
+        {
+          "chip": "esp32c3",
+          "release": {
+            "repo": "pr3y/Bruce",
+            "include": ["c3"],
+            "exclude": ["bootloader", "partition", "boot_app"],
+            "offset": 0
+          }
+        },
+        {
+          "chip": "esp32c6",
+          "release": {
+            "repo": "pr3y/Bruce",
+            "include": ["c6"],
+            "exclude": ["bootloader", "partition", "boot_app"],
+            "offset": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "marauder",
+      "name": "ESP32 Marauder",
+      "homepage": "https://github.com/justcallmekoko/ESP32Marauder",
+      "builds": [
+        {
+          "chip": "esp32",
+          "release": {
+            "repo": "justcallmekoko/ESP32Marauder",
+            "include": ["marauder"],
+            "exclude": ["s3", "bootloader", "partition", "boot_app", "spiffs"],
+            "offset": "0x10000",
+            "note": "Marauder publishes app-only images, written at 0x10000. That assumes the board already carries the Marauder bootloader. On a blank board, use the official installer linked under Order Links first."
+          }
+        },
+        {
+          "chip": "esp32s3",
+          "release": {
+            "repo": "justcallmekoko/ESP32Marauder",
+            "include": ["s3"],
+            "exclude": ["bootloader", "partition", "boot_app", "spiffs"],
+            "offset": "0x10000",
+            "note": "Marauder publishes app-only images, written at 0x10000. That assumes the board already carries the Marauder bootloader. On a blank board, use the official installer linked under Order Links first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "deauther",
+      "name": "ESP8266 Deauther",
+      "homepage": "https://github.com/SpacehuhnTech/esp8266_deauther",
+      "builds": [
+        {
+          "chip": "esp8266",
+          "release": {
+            "repo": "SpacehuhnTech/esp8266_deauther",
+            "include": ["deauther"],
+            "exclude": ["bootloader", "partition", "spiffs"],
+            "offset": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "wardriver",
+      "name": "ESP32 Wardriver",
+      "homepage": "https://github.com/JosephHewitt/wardriver_rev3",
+      "builds": [
+        { "chip": "esp32", "url": "", "offset": 0, "sha256": "" }
+      ]
+    },
+    {
+      "id": "lxveos",
+      "name": "LxveOS",
+      "homepage": "",
+      "builds": [
+        { "chip": "esp32", "url": "", "offset": 0, "sha256": "" },
+        { "chip": "esp32s3", "url": "", "offset": 0, "sha256": "" }
+      ]
+    }
+  ]
+}

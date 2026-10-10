@@ -1,0 +1,25 @@
+name = "sherlock-contact"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+# The exact origin the site is served from. No trailing slash.
+# Change this to the real domain before going live.
+ALLOWED_ORIGIN = "https://sherlocknots.github.io"
+
+# Set to "false" to refuse uploads entirely.
+ALLOW_ATTACHMENTS = "true"
+
+# Rate limiting is REQUIRED. The worker returns 503 without the binding below
+# rather than quietly running with no limit at all.
+#
+# Create the namespace once:
+#   npx wrangler kv namespace create RATE_LIMIT
+# then paste the id it prints over the placeholder. Deploying with the
+# placeholder still there will fail, which is the intention.
+#
+# To deliberately run with no rate limiting, delete this block and add
+# ALLOW_UNLIMITED = "true" to [vars] above. Do not do that on a public site.
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
