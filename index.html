@@ -1,447 +1,1360 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sherlock</title>
-<meta name="description" content="Sherlock: cyber security student focused on embedded systems.">
-<link rel="canonical" href="https://shxerlock.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Sherlock">
-<meta property="og:url" content="https://github.com/shxerlock">
-<meta name="twitter:card" content="summary">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Sherlock",
-  "url": "https://github.com/shxerlock",
-  "author": {
-    "@type": "Person",
-    "name": "Sherlock",
-    "url": "https://github.com/shxerlock"
+/* Sherlock: site styles
+   Dark is the default. Light mode is data-theme="light" on <html>.
+   One simple accent color throughout, no gradients or dual tones.
+   Motion is limited to: smooth scrolling, the hero typing effect, the fade between
+   Showcase views and the colour change on the Contact icons. Nothing tilts,
+   floats, slides or follows the pointer. The Project 1 photo carousel also
+   cross-fades between photos (opacity only). */
+
+:root {
+  --bg: #0a0c0f;
+  --surface: #13161b;
+  --border: #242830;
+  --text: #edeff2;
+  --muted: #868d99;
+  --accent: #2bd9a8;
+  --well: rgba(0, 0, 0, 0.35);
+  --success: #34d399;
+  --brand-discord: #5865f2;
+  --brand-github: #3fb950;
+  --brand-email: var(--accent);
+  --brand-instagram: #ff4f72;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f7f8f9;
+  --surface: #ffffff;
+  --border: #e3e5e9;
+  --text: #11151a;
+  --muted: #5c6370;
+  --accent: #0ea678;
+  --well: rgba(0, 0, 0, 0.05);
+  --success: #0f8a5f;
+  --brand-discord: #4752c4;
+  --brand-github: #1a7f37;
+  --brand-email: var(--accent);
+  --brand-instagram: #d6264f;
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
-</script>
-<meta name="theme-color" content="#0a0f12">
-<link rel="icon" href="data:,">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'self' https://api.web3forms.com; connect-src 'self' https://api.web3forms.com https://*.workers.dev https://api.github.com https://github.com https://objects.githubusercontent.com https://release-assets.githubusercontent.com https://raw.githubusercontent.com">
-<link rel="stylesheet" href="assets/css/styles.css">
-<script src="assets/js/theme-init.js"></script>
-</head>
-<body>
-<svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true" focusable="false"><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol><symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 9l4 3-4 3M12 15h6"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol><symbol id="i-microchip" viewBox="0 0 512 512"><path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V280h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V176h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H280V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zM160 128H352c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm192 32H160V352H352V160z"/></symbol><symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"/></symbol><symbol id="i-server" viewBox="0 0 512 512"><path d="M64 32C28.7 32 0 60.7 0 96v64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm48 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM64 288c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V352c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm56 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></symbol><symbol id="i-discord" viewBox="0 0 640 512"><path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"/></symbol><symbol id="i-github" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></symbol><symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol><symbol id="i-instagram" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol></svg>
 
-<progress class="scroll-progress" id="scrollProgress" max="100" value="0" aria-hidden="true"></progress>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-<a class="skip-link" href="#main">Skip to content</a>
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
 
-<nav aria-label="Primary">
-  <div class="nav-inner">
-    <a class="brand" href="#about">Sherlock</a>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#work">Projects</a>
-      <a href="kali-tools.html">Kali Tools</a>
-      <a href="#showcase">Showcase</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Switch to light mode">
-      <svg class="icon icon-stroke" aria-hidden="true"><use href="#i-sun"></use></svg>
-    </button>
-  </div>
-</nav>
+code, .mono {
+  font-family: ui-monospace, "JetBrains Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+}
 
-<header class="hero" id="about">
-  <h1>Sherlock</h1>
-  <p class="hero-typing" id="heroTyping">
-    <span class="hero-typing-sizer">Sherlock: Cyber Security Student exploring Embedded System Issues.</span>
-    <span class="hero-typing-sizer">Interested in Cyber Security and aiming to become a Cybersecurity Engineer in 3 years.</span>
-    <span class="hero-typing-sizer">Passionate about microcontrollers, building things, and understanding how they work.</span>
-    <span class="hero-typing-live" aria-hidden="true"><span class="typed"></span><span class="caret"></span><span class="rest"></span></span>
-    <span class="visually-hidden hero-typing-sr"></span>
-  </p>
-</header>
+a {
+  color: inherit;
+}
 
-<main id="main">
-<div class="wrap">
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
-  <section class="section" id="work">
-    <h2 class="section-title">Current Work ↓</h2>
-    <div class="grid">
-      <article class="card">
-        <div class="card-title-row">
-          <h3 class="card-title">01. Soon</h3>
-          <span class="badge">BLEG</span>
-        </div>
-        <p class="card-desc">Project details coming soon... <span class="card-soon">Soon BLEG</span></p>
-        <span class="card-status">In progress</span>
-      </article>
-      <article class="card">
-        <h3 class="card-title">02. Soon</h3>
-        <p class="card-desc">Project details coming soon...</p>
-        <span class="card-status">In progress</span>
-      </article>
-      <article class="card">
-        <h3 class="card-title">03. Soon</h3>
-        <p class="card-desc">Project details coming soon...</p>
-        <span class="card-status">In progress</span>
-      </article>
-      <article class="card">
-        <h3 class="card-title">04. Soon</h3>
-        <p class="card-desc">Project details coming soon...</p>
-        <span class="card-status">In progress</span>
-      </article>
-      <article class="card">
-        <h3 class="card-title">05. Soon</h3>
-        <p class="card-desc">Project details coming soon...</p>
-        <span class="card-status">In progress</span>
-      </article>
-      <article class="card">
-        <h3 class="card-title">06. Soon</h3>
-        <p class="card-desc">Project details coming soon...</p>
-        <span class="card-status">In progress</span>
-      </article>
-    </div>
-  </section>
+::selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
 
-  <section class="section" id="links">
-    <h2 class="section-title">Links ↓</h2>
-    <div class="grid grid-wide">
-      <article class="card">
-        <h3 class="card-title">Marauder</h3>
-        <p class="card-desc">ESP32 Marauder by justcallmekoko: a WiFi and Bluetooth offensive toolkit for ESP32 boards. The official installer page covers the supported hardware and walks you through getting a build onto it.</p>
-        <a class="btn" href="https://justcallmekoko.github.io/MarauderInstaller/" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" aria-hidden="true"><use href="#i-microchip"></use></svg>Open Marauder installer
-        </a>
-      </article>
-      <article class="card">
-        <h3 class="card-title">Bruce</h3>
-        <p class="card-desc">Bruce is a red-team firmware for ESP32 devices, with strong support for M5Stack and Lilygo hardware. Their own site carries the boards, the docs and the official web flasher.</p>
-        <a class="btn" href="https://bruce.computer/" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" aria-hidden="true"><use href="#i-bolt"></use></svg>Open bruce.computer
-        </a>
-      </article>
-      <article class="card">
-        <h3 class="card-title">ESP32 Marauder</h3>
-        <p class="card-desc">A comprehensive suite for ESP32 Wi-Fi &amp; Bluetooth analysis, featuring project details and tools by Lxve.</p>
-        <a class="btn" href="https://esp32marauder.com/" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" aria-hidden="true"><use href="#i-microchip"></use></svg>Open esp32marauder.com
-        </a>
-      </article>
-      <article class="card">
-        <h3 class="card-title">Cyber Controller</h3>
-        <p class="card-desc">Advanced web-based GUI and control application providing 100% complete management over ESP32 devices, superior to standard apps.</p>
-        <a class="btn" href="https://cybercontroller.org/" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" aria-hidden="true"><use href="#i-server"></use></svg>Open cybercontroller.org
-        </a>
-      </article>
-    </div>
-  </section>
+[hidden] {
+  display: none !important;
+}
 
-  <section class="section" id="showcase">
-    <h2 class="section-title">Showcase</h2>
-    <div class="showcase-views" id="showcaseViews">
-      <div class="showcase-view showcase-list" id="showcaseList">
-        <article class="card showcase-item" id="showcase-item-1">
-          <h3 class="card-title">Project 01</h3>
-          <div class="showcase-media showcase-media-photo" id="showcaseMedia1">
-            <img src="Images/Board.jpeg" alt="ESP32-D development board, top view" width="960" height="1280" loading="lazy">
-            <button type="button" class="showcase-reveal-btn" data-reveal-target="showcaseMedia1">Show Picture</button>
-          </div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/1">Details</a>
-        </article>
-        <button type="button" class="btn showcase-toggle-btn" id="showcaseShowOtherBtn" aria-expanded="false">Show Other Projects</button>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-2" hidden>
-          <h3 class="card-title">Project 02</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/2">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-3" hidden>
-          <h3 class="card-title">Project 03</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/3">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-4" hidden>
-          <h3 class="card-title">Project 04</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/4">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-5" hidden>
-          <h3 class="card-title">Project 05</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/5">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-6" hidden>
-          <h3 class="card-title">Project 06</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/6">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-7" hidden>
-          <h3 class="card-title">Project 07</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/7">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-8" hidden>
-          <h3 class="card-title">Project 08</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/8">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-9" hidden>
-          <h3 class="card-title">Project 09</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/9">Details</a>
-        </article>
-        <article class="card showcase-item showcase-extra-item" id="showcase-item-10" hidden>
-          <h3 class="card-title">Project 10</h3>
-          <div class="showcase-media" role="img" aria-label="Picture coming soon">Picture coming soon</div>
-          <p class="showcase-desc"><span class="showcase-label">Description</span>Project description coming soon.</p>
-          <a class="btn showcase-details-btn" href="#showcase/10">Details</a>
-        </article>
-        <button type="button" class="btn showcase-toggle-btn showcase-extra-item" id="showcaseShowLessBtn" hidden>Show Less</button>
-      </div>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-1" aria-labelledby="showcase-detail-title-1" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-1" tabindex="-1">Project 01</h3>
-        <div class="carousel" role="group" aria-roledescription="carousel" aria-label="Project 01 photos">
-      <div class="carousel-viewport">
-        <figure class="carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 4" data-caption="Board">
-          <img src="Images/Board.jpeg" alt="ESP32-D development board, top view" width="960" height="1280" loading="lazy">
-        </figure>
-        <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4" data-caption="Cables" aria-hidden="true">
-          <img src="Images/Cables.jpeg" alt="Bundle of colored female jumper wires" width="960" height="1280" loading="lazy">
-        </figure>
-        <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4" data-caption="NRF module" aria-hidden="true">
-          <img src="Images/Nrf.jpeg" alt="NRF24L01 radio module with a gold SMA antenna connector" width="960" height="1280" loading="lazy">
-        </figure>
-        <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4" data-caption="Antenna" aria-hidden="true">
-          <img src="Images/Antenna.jpeg" alt="Black SMA antenna for the NRF module" width="960" height="1280" loading="lazy">
-        </figure>
-        <button type="button" class="carousel-btn carousel-prev" aria-label="Previous image">&lt;</button>
-        <button type="button" class="carousel-btn carousel-next" aria-label="Next image">&gt;</button>
-      </div>
-      <p class="carousel-status" role="status" aria-live="polite">1 / 4 &middot; Board</p>
-    </div>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Step-by-step wiring and assembly guide for the ESP32 and the NRF module.</p>
-        <a class="btn showcase-tutorial-btn" href="#showcase/1/tutorial">Open Tutorial</a>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-2" aria-labelledby="showcase-detail-title-2" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-2" tabindex="-1">Project 02</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-3" aria-labelledby="showcase-detail-title-3" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-3" tabindex="-1">Project 03</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-4" aria-labelledby="showcase-detail-title-4" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-4" tabindex="-1">Project 04</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-5" aria-labelledby="showcase-detail-title-5" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-5" tabindex="-1">Project 05</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-6" aria-labelledby="showcase-detail-title-6" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-6" tabindex="-1">Project 06</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-7" aria-labelledby="showcase-detail-title-7" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-7" tabindex="-1">Project 07</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-8" aria-labelledby="showcase-detail-title-8" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-8" tabindex="-1">Project 08</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-9" aria-labelledby="showcase-detail-title-9" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-9" tabindex="-1">Project 09</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-detail" id="showcase-detail-10" aria-labelledby="showcase-detail-title-10" hidden>
-        <a class="showcase-back" href="#showcase">&larr; Back to Showcase</a>
-        <h3 class="card-title" id="showcase-detail-title-10" tabindex="-1">Project 10</h3>
-        <h4 class="detail-heading">How it's working</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Source</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <h4 class="detail-heading">Tutorial</h4>
-        <p class="card-desc">Details coming soon.</p>
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-      <article class="card showcase-view showcase-tutorial" id="showcase-tutorial-1" aria-labelledby="showcase-tutorial-title-1" hidden>
-        <a class="showcase-back" href="#showcase/1">&larr; Back to Details</a>
-        <h3 class="card-title" id="showcase-tutorial-title-1" tabindex="-1">Project 01 Tutorial</h3>
-        <p class="card-desc tutorial-lead">Connect an ESP32-D board to an NRF24L01 + PA + LNA radio module with seven jumper wires. Follow the steps in order, with the power unplugged until the last step.</p>
+.sprite {
+  display: none;
+}
 
-        <h4 class="detail-heading">What you need</h4>
-        <ul class="tutorial-list">
-          <li>1 ESP32-D development board</li>
-          <li>1 NRF24L01 + PA + LNA module with its antenna</li>
-          <li>7 female-to-female jumper wires</li>
-          <li>1 micro-USB cable</li>
-        </ul>
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex: none;
+}
 
-        <div class="tutorial-step">
-          <figure class="tutorial-figure">
-            <img src="Images/Nrftuto.jpg" alt="Pinout of the NRF24L01 + PA + LNA module: GND, VCC, CE, CSN, SCK, MOSI and MISO on the 2 by 4 header, antenna on the right" width="624" height="688" loading="lazy">
-            <figcaption>NRF24L01 + PA + LNA pinout</figcaption>
-          </figure>
-          <div class="tutorial-text">
-            <h4 class="detail-heading">Step 1. Prepare the NRF module</h4>
-            <ol class="tutorial-list">
-              <li>Screw the antenna onto the gold SMA connector first. Never power the module without its antenna.</li>
-              <li>Hold the module like the picture, with the antenna on the right and the 2 by 4 pin header on the left.</li>
-              <li>Find the seven pins you will use: GND, VCC, CE, CSN, SCK, MOSI and MISO. The last pin (IRQ) stays unconnected.</li>
-            </ol>
-          </div>
-        </div>
+.icon-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-        <div class="tutorial-step">
-          <figure class="tutorial-figure">
-            <img src="Images/ESP32D.jpeg" alt="ESP32-D board with colored wires on 3V3, GND, GPIO 12, 13, 14, 15 and 16" width="894" height="1200" loading="lazy">
-            <figcaption>ESP32-D wiring, wire colors match the table</figcaption>
-          </figure>
-          <div class="tutorial-text">
-            <h4 class="detail-heading">Step 2. Wire the module to the ESP32</h4>
-            <p class="card-desc">Push one jumper wire onto each NRF pin, then connect the other end to the ESP32 pin in the same row of this table. The wire colors are the ones used in both pictures.</p>
-            <div class="table-scroll">
-              <table class="wiring-table">
-                <thead><tr><th scope="col">NRF pin</th><th scope="col">Wire</th><th scope="col">ESP32 pin</th></tr></thead>
-                <tbody>
-              <tr><td>VCC</td><td><span class="swatch swatch-red"></span>Red</td><td>3V3</td></tr>
-              <tr><td>GND</td><td><span class="swatch swatch-black"></span>Black</td><td>GND</td></tr>
-              <tr><td>CE</td><td><span class="swatch swatch-yellow"></span>Yellow</td><td>GPIO 16</td></tr>
-              <tr><td>CSN</td><td><span class="swatch swatch-green"></span>Green</td><td>GPIO 15</td></tr>
-              <tr><td>SCK</td><td><span class="swatch swatch-gray"></span>Gray</td><td>GPIO 14</td></tr>
-              <tr><td>MOSI</td><td><span class="swatch swatch-blue"></span>Blue</td><td>GPIO 13</td></tr>
-              <tr><td>MISO</td><td><span class="swatch swatch-orange"></span>Orange</td><td>GPIO 12</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <ol class="tutorial-list tutorial-list-after">
-              <li>Power first: red wire from VCC to 3V3, black wire from GND to GND. Use 3V3 only, never 5V.</li>
-              <li>SPI lines next: SCK to GPIO 14, MISO to GPIO 12, MOSI to GPIO 13.</li>
-              <li>Control lines last: CE to GPIO 16 and CSN to GPIO 15.</li>
-            </ol>
-          </div>
-        </div>
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 
-        <h4 class="detail-heading">Step 3. Check and power on</h4>
-        <ol class="tutorial-list">
-          <li>Compare every wire with the table and the ESP32 picture. A swapped pair is the most common reason a module does not respond.</li>
-          <li>Make sure the antenna is tight and no bare metal pins touch each other.</li>
-          <li>Plug the micro-USB cable into the ESP32 last.</li>
-          <li>If the board resets when the module transmits, add a 10 &micro;F capacitor between the module's VCC and GND pins, as close to the module as you can. The PA + LNA version draws more current than a basic NRF24L01.</li>
-        </ol>
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  z-index: 300;
+  padding: 10px 16px;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+}
 
-        <p class="showcase-help">You have troubles to understand? <a href="#contact">Contact me</a></p>
-      </article>
-    </div>
-  </section>
+.skip-link:focus {
+  top: 0;
+}
 
-  <section class="section" id="contact">
-    <h2 class="section-title">Contact</h2>
-    <p class="section-intro">Open to collaboration, consulting, and interesting conversations.</p>
-    <div class="contact-links">
-      <a class="btn contact-btn contact-discord" href="https://discord.gg/xExgKRD6sB" target="_blank" rel="noopener noreferrer">
-        <svg class="icon" aria-hidden="true"><use href="#i-discord"></use></svg>Discord
-      </a>
-      <a class="btn contact-btn contact-github" href="https://github.com/shxerlock" target="_blank" rel="noopener noreferrer">
-        <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>GitHub
-      </a>
-      <a class="btn contact-btn contact-email" href="mailto:shxerlock@proton.me">
-        <svg class="icon" aria-hidden="true"><use href="#i-envelope"></use></svg>shxerlock@proton.me
-      </a>
-      <a class="btn contact-btn contact-instagram" href="https://www.instagram.com/linuxsocials?stkn=Zjl4aHJkdjEwZzcx" target="_blank" rel="noopener noreferrer">
-        <svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg>Instagram
-      </a>
-    </div>
-  </section>
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 200;
+  border: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
 
-</div>
-</main>
+.scroll-progress::-webkit-progress-bar {
+  background: transparent;
+}
 
-<footer>
-  <div class="footer-inner">
-    <p class="footer-copy">&copy; <span id="year">2026</span> Sherlock. All rights reserved.</p>
-    <div class="footer-legal">
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-    </div>
-  </div>
-</footer>
-<script src="assets/js/main.js" type="module"></script>
-</body>
-</html>
+.scroll-progress::-webkit-progress-value {
+  background-color: var(--accent);
+}
+
+.scroll-progress::-moz-progress-bar {
+  background-color: var(--accent);
+}
+
+/* Layout */
+
+.wrap {
+  width: min(1100px, 100% - 48px);
+  margin: 0 auto;
+}
+
+/* Header and navigation: everything sits on the right */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px 24px;
+  width: min(1100px, 100% - 48px);
+  min-height: 67px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 32px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 32px;
+}
+
+.theme-toggle {
+  justify-self: end;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--text);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 32px;
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+header.hero {
+  width: min(1100px, 100% - 48px);
+  margin: 0 auto;
+  padding: 96px 0 24px;
+  text-align: right;
+  scroll-margin-top: 68px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.hero .subtitle {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Hero typing line. The invisible sizers (all three sentences) share one grid
+   cell with the live text, so the box is always as tall as the longest sentence
+   and the page below never shifts while it types. */
+
+.hero-typing {
+  display: grid;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.hero-typing-sizer,
+.hero-typing-live {
+  grid-area: 1 / 1;
+}
+
+.hero-typing-sizer {
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+html:not(.js) .hero-typing-sizer:first-child {
+  visibility: visible;
+}
+
+.hero-typing .rest {
+  visibility: hidden;
+}
+
+.hero-typing .caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-right: -2px;
+  vertical-align: text-bottom;
+  background-color: var(--accent);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+.hero-typing.is-typing .caret {
+  animation: none;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-typing .caret {
+    animation: none;
+  }
+}
+
+main {
+  flex: 1;
+  padding-bottom: 96px;
+}
+
+/* Sections */
+
+.section {
+  padding-top: 72px;
+  scroll-margin-top: 68px;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  scroll-margin-top: 68px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 2px;
+  margin-top: 14px;
+  border-radius: 2px;
+  background-color: var(--accent);
+}
+
+.section-intro {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.section-intro a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.section-intro a:hover,
+.section-intro a:focus-visible {
+  text-decoration: underline;
+}
+
+#footerDisclaimerLink {
+  scroll-margin-top: 88px;
+}
+
+.section-title + .grid,
+.section-title + .card {
+  margin-top: 28px;
+}
+
+/* Buttons: contact buttons, card links and the 404 link share one style */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 43px;
+  padding: 0 20px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  border-color: var(--accent);
+}
+
+.btn .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-btn {
+  transition: border-color 0.2s ease;
+}
+
+.contact-btn .icon {
+  transition: color 0.2s ease;
+}
+
+.contact-discord { --brand: var(--brand-discord); }
+.contact-github { --brand: var(--brand-github); }
+.contact-email { --brand: var(--brand-email); }
+.contact-instagram { --brand: var(--brand-instagram); }
+
+.contact-btn:hover,
+.contact-btn:focus-visible {
+  border-color: var(--brand);
+}
+
+.contact-btn:hover .icon,
+.contact-btn:focus-visible .icon {
+  color: var(--brand);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Cards */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.grid-wide {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 640px) {
+  .grid-wide {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  padding: 28px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.card-title {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card-title-row .card-title {
+  margin-bottom: 0;
+}
+
+.card-desc {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.card .btn {
+  margin-top: 20px;
+}
+
+.badge {
+  padding: 2px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.card-soon {
+  display: block;
+  margin-top: 8px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.card-status {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 2px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+/* Showcase: a single vertical column, list view and Details views */
+
+.showcase-views {
+  max-width: 720px;
+  margin-top: 28px;
+}
+
+.showcase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.showcase-view {
+  opacity: 1;
+  transition: opacity 0.24s ease;
+}
+
+.showcase-view.is-fading {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-view {
+    transition: none;
+  }
+}
+
+.showcase-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 18px;
+  background-color: var(--well);
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+}
+
+.showcase-media-photo {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-width: 420px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #000000;
+  border-style: solid;
+}
+
+.showcase-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Pictures stay hidden until "Show Picture" is clicked. */
+
+.showcase-media-photo img {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.showcase-media-photo.is-revealed img {
+  opacity: 1;
+}
+
+.showcase-reveal-btn {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.showcase-reveal-btn .icon {
+  width: 26px;
+  height: 26px;
+  color: #05100c;
+  stroke-width: 2.25;
+}
+
+.showcase-reveal-btn:hover,
+.showcase-reveal-btn:focus-visible {
+  transform: scale(1.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-reveal-btn {
+    transition: none;
+  }
+}
+
+.showcase-media-photo.is-revealed .showcase-reveal-btn {
+  display: none;
+}
+
+/* Projects without a photo yet: same square frame, a muted (non-interactive)
+   eye icon and a label, so every slot in the grid reads as one consistent
+   design even before its picture is added. */
+
+.showcase-media-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--well);
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.showcase-media-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+.showcase-media-empty-icon .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+}
+
+.showcase-media-empty-label {
+  font-size: 13px;
+}
+
+/* Progressive disclosure: only the first project shows at first. */
+
+.showcase-toggle-btn {
+  align-self: flex-start;
+}
+
+.showcase-desc {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.showcase-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.showcase-item .btn {
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+.showcase-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.showcase-back:hover,
+.showcase-back:focus-visible {
+  color: var(--text);
+}
+
+.detail-heading {
+  margin: 24px 0 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.showcase-detail .card-title {
+  margin-bottom: 0;
+}
+
+.showcase-help {
+  margin-top: 32px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.showcase-help a {
+  display: inline-block;
+  padding: 2px 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Project 1 photo carousel */
+
+.carousel {
+  width: 100%;
+  margin: 20px auto 0;
+}
+
+.carousel-viewport {
+  position: relative;
+  width: 100%;
+  max-height: 560px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: #000000;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.carousel-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.carousel-prev {
+  left: 10px;
+}
+
+.carousel-next {
+  right: 10px;
+}
+
+.carousel-btn:hover,
+.carousel-btn:focus-visible {
+  border-color: var(--accent);
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.carousel-status {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide {
+    transition: none;
+  }
+}
+
+/* Project 1 tutorial view */
+
+.tutorial-lead {
+  margin-top: 12px;
+}
+
+.tutorial-list {
+  padding-left: 22px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.tutorial-list li {
+  margin-bottom: 8px;
+}
+
+.tutorial-list-after {
+  margin-top: 16px;
+}
+
+.tutorial-step {
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  gap: 20px 24px;
+  align-items: start;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.tutorial-step .detail-heading:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .tutorial-step {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.tutorial-figure {
+  margin: 0;
+}
+
+.tutorial-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.tutorial-figure figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.table-scroll {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.wiring-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.wiring-table th,
+.wiring-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.wiring-table th {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wiring-table td {
+  color: var(--text);
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.swatch-red { background-color: #e5383b; }
+.swatch-black { background-color: #000000; }
+.swatch-yellow { background-color: #ffd60a; }
+.swatch-green { background-color: #1fb35a; }
+.swatch-gray { background-color: #9a9aa5; }
+.swatch-blue { background-color: #2f6fed; }
+.swatch-orange { background-color: #f4722b; }
+
+/* Kali CMD */
+
+.kali-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.kali-header .icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+.kali-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.kali-line {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  background-color: var(--well);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.kali-line code {
+  white-space: pre;
+}
+
+.kali-copy-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.kali-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 12px 14px;
+  background-color: var(--well);
+  color: var(--text);
+  border: none;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kali-copy-btn code {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.kali-copy-btn .icon {
+  color: var(--accent);
+}
+
+.kali-copy-status {
+  min-width: 70px;
+  color: var(--success);
+  font-size: 0.8rem;
+}
+
+.kali-explain {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Kali tool cards (Forex Booster, Nuclei): black terminal look */
+
+.section-tight {
+  padding-top: 16px;
+}
+
+.kali-tool-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.kali-tool-icon {
+  display: block;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.kali-tool .kali-explain {
+  margin-bottom: 22px;
+}
+
+.kali-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+}
+
+.kali-step-title {
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kali-steps .kali-copy-wrap {
+  margin-bottom: 0;
+}
+
+.kali-copy-btn.kali-terminal {
+  background-color: #000000;
+  color: #ececf2;
+  border: 1px solid #23232e;
+  border-left: 3px solid var(--accent);
+}
+
+.kali-terminal .prompt {
+  margin-right: 10px;
+  color: #a78bfa;
+  user-select: none;
+}
+
+.kali-terminal .icon {
+  color: #a78bfa;
+}
+
+.kali-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Legal pages and 404 */
+
+.prose {
+  max-width: 720px;
+  padding-top: 48px;
+}
+
+.prose h2 {
+  margin: 40px 0 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose p,
+.prose li {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.prose ul {
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.prose a {
+  display: inline-block;
+  padding: 2px 0;
+  color: var(--text);
+}
+
+.error-page {
+  padding-top: 72px;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.error-page p {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.error-page .btn {
+  margin-top: 24px;
+}
+
+/* Kali Tools directory page */
+
+.kalitools-notice {
+  display: flex;
+  gap: 10px;
+  max-width: 720px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background-color: var(--well);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 8px 8px 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.kalitools-notice strong {
+  color: var(--text);
+}
+
+.kalitools-notice a {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tool-search-wrap {
+  position: relative;
+  max-width: 480px;
+  margin-top: 28px;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-radius: 15px;
+  box-shadow: 0 16px 40px -20px var(--accent);
+}
+
+.tool-search {
+  display: block;
+  width: 100%;
+  height: 52px;
+  padding: 0 46px 0 48px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15.5px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.tool-search::placeholder {
+  color: var(--muted);
+}
+
+.tool-search:focus {
+  outline: none;
+}
+
+.tool-search::-webkit-search-cancel-button,
+.tool-search::-webkit-search-decoration {
+  appearance: none;
+  -webkit-appearance: none;
+  display: none;
+}
+
+.tool-search-icon {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.tool-search-clear {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--muted);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tool-search-clear .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.tool-search-clear:hover,
+.tool-search-clear:focus-visible {
+  background-color: var(--well);
+  color: var(--text);
+}
+
+.tool-search-hint {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.tool-search-empty {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tool-category {
+  padding-top: 56px;
+}
+
+.tool-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.tool-card {
+  padding: 20px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.tool-card.is-highlighted {
+  background-color: var(--well);
+  border-color: var(--accent-2);
+}
+
+.tool-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tool-card-head .card-title {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+.tool-emoji {
+  flex: none;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.tool-card .card-desc {
+  font-size: 13.5px;
+}
+
+/* Footer: plain text, no dividers or borders */
+
+footer {
+  padding: 40px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  width: min(1100px, 100% - 48px);
+  margin: 0 auto;
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.footer-legal a {
+  display: inline-block;
+  padding: 5px 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+  color: var(--text);
+}
+
+@media (max-width: 560px) {
+  .nav-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand toggle"
+      "links links";
+    gap: 10px 16px;
+    padding: 10px 0;
+  }
+
+  .brand {
+    grid-area: brand;
+  }
+
+  .theme-toggle {
+    grid-area: toggle;
+  }
+
+  .nav-links {
+    grid-area: links;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 16px;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+}
