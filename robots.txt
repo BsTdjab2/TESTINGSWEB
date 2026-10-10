@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Update the host here when the real domain is set.
-Sitemap: https://sherlocknots.github.io/sitemap.xml
